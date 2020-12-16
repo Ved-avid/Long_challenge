@@ -1,0 +1,81 @@
+import java.io.*;
+import java.util.*;
+
+class Vaccine1{
+    static private Scanner sc = new Scanner(System.in);
+    static public void main(String[] args){
+        int d1 = sc.nextInt();
+        int v1 = sc.nextInt();
+        int d2 = sc.nextInt();
+        int v2 = sc.nextInt();
+        int target = sc.nextInt();
+        
+        int perDay = (v1+v2);
+        int ans = 0, day = 0, sum = 0, rem = 0;
+        int number = (int)(target/perDay);
+        int late = Math.min(d1,d2)-1;
+        
+        if(d1==1 && d2 == 1){
+            rem = target%perDay;
+            if(rem==0){
+                System.out.println(number);
+            }
+            else{
+                System.out.println(number+1);
+            }
+        }
+        else{
+            if(d1==d2){
+                rem = target%perDay;
+                if(rem==0){
+                    System.out.println(late+number);
+                }
+                else{
+                    System.out.println(late+number+1);
+                }
+            }
+            else if(d1>d2){
+                for(int i = d2; i<d1;i++){
+                    if(sum<target){
+                        sum+=(v2);
+                        day++;
+                    }
+                }
+                if(target<=sum){
+                    System.out.println(day+late);
+                }
+                else{
+                    target=target-sum;
+                    rem = target%perDay;
+                    if(rem==0){
+                        System.out.println(late+(int)(target/perDay)+day);
+                    }
+                    else{
+                        System.out.println(late+1+(int)(target/perDay)+day);
+                    }
+                }
+            }else{
+                for(int i=d1;i<d2;i++){
+                    if(sum<target){
+                        sum+=v1;
+                        day++;
+                    }
+                }
+                 if(target<=sum){
+                    System.out.println(day+late);
+                }
+                else{
+                    target=target-sum;
+                    rem = target%perDay;
+                    if(rem==0){
+                        System.out.println(late+(int)(target/perDay)+day);
+                    }
+                    else{
+                        System.out.println(late+1+(int)(target/perDay)+day);
+                    }
+                }
+                
+            }
+        }
+    }
+}
