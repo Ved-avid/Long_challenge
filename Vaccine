@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+class Vaccine{
+    static public void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+        while(t-->0){
+            String[] s = br.readLine().split(" ");
+            int n = Integer.parseInt(s[0]);
+            int d = Integer.parseInt(s[1]);
+            
+            String[] v = br.readLine().split(" ");
+            int[] a = new int[n];
+            int safe=0, risk=0;
+            for(int i = 0;i<n;i++){
+                a[i] = Integer.parseInt(v[i]);
+                if(a[i]<=9 || a[i]>=80){
+                    risk++;
+                }
+                else{
+                    safe++;
+                }
+            }
+            
+            int ans=0;
+            if(risk%d==0){
+                ans+=(risk/d);
+            }
+            else{
+                ans+=(int)(risk/d)+1;
+            }
+            int ans1=0;
+            if(safe%d==0){
+                ans1+=(safe/d);
+            }
+            else{
+                ans1+=(int)(safe/d)+1;
+            }
+            
+            System.out.println((ans+ans1));
+            
+        }
+    }
+}
