@@ -1,0 +1,76 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
+
+class PosPrefs{
+    static public void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
+        int t = Integer.parseInt(br.readLine());
+        while(t-->0){
+            String[] s = br.readLine().split(" ");
+            int n = Integer.parseInt(s[0]);
+            int k = Integer.parseInt(s[1]);
+            
+            if(k==0){
+                for(int i = 1;i<=n;i++){
+                    wr.write((-i)+" ");
+                }
+                wr.write("\n");
+            }
+            else if(k==n){
+                for(int i = 1;i<=n;i++){
+                    wr.write(i+" ");
+                }
+                wr.write("\n");
+            }
+            else{
+                int counter=0,sum=0;
+                for(int i = 1;i<=n;i++){
+                    if(counter<k){
+                        if(sum==0){
+                            sum+=i;
+                            wr.write(i+" ");
+                            counter++;
+                        }
+                        else if(sum>0){
+                            if(i<=n-1){
+                                if(sum+i>i+1){
+                                    if(k-counter>=n-i+1){
+                                        sum+=i;
+                                        wr.write(i+" ");
+                                        counter++;
+                                    }
+                                    else{
+                                        sum+=(-i);
+                                        wr.write((-i)+" ");
+                                    }
+                                }
+                                else{
+                                    sum+=i;
+                                    wr.write(i+" ");
+                                    counter++;
+                                }
+                            }else{
+                                sum+=i;
+                                wr.write(i+" ");
+                            }
+                        }
+                        else{
+                            wr.write(i+" ");
+                            sum+=i;
+                            counter++;
+                        }
+                    }
+                    else{
+                        wr.write((-i)+" ");
+                    }
+                }
+                wr.write("\n");
+            }
+            wr.flush();
+        }
+    }
+}
